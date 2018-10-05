@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Listas en vuejs</title>
+</head>
+<body>
+
+	<div id="maindiv">
+		<ul> 
+		    <li v-for="item in people" >{{ item }}</li>
+		</ul>
+		<input type="text" v-model="name" v-on:keyup.enter="addName">
+		<label for="btn_borrar">usa el metodo pop para borrar el ultimo elemento del array</label>
+		<button name="btn_borrar"v-on:click="borrar">borrar ultimo</button>
+
+	</div>
+
+ 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ 	<script type="text/javascript">
+ 		new Vue({
+ 			el :"#maindiv",
+ 			data: {
+ 				people: ['linda','manchi','diana','flopi']
+ 			},
+ 			name: '',
+ 			methods:{
+ 				addName: function(){
+ 					this.people.push(this.name);
+ 					this.name = '';
+ 				},
+ 				borrar: function(){
+ 					this.people.pop();
+ 				}
+ 			}
+ 		});
+ 	</script>
+</body>
+</html>
