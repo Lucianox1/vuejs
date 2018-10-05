@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<title>vue con ajax</title>
+</head>
+<body>
+	<div id="maindiv" class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<h1>Lista con ajax</h1>
+				<ul class="list-group">
+					<li v-for='item in list' class="list-group-item">
+						{{ item.name}}
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-8">
+				<h1>Json</h1>
+				<pre>
+					{{ $data | json}}
+				</pre>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!--Vue por si solo no puede hacer llamadas ajax pero con este recurso si puede
+	use https://randomuser.me/api/?results=10 
+	VUE recomienda usar axios para conexiones ajax   -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script type="text/javascript">
+		var url_users = 'https://randomuser.me/api/?results=10';
+		var url_user2 = 'https://jsonplaceholder.typicode.com/users';
+		new Vue({
+			el: "#maindiv",
+			created : function(){
+				this.get_users();
+			},
+			data : {
+				list : []
+			},
+			methods : {
+				get_users : function(){
+					axios.get(url_users).then(response => {
+						this.list = response.data;
+					});
+				}
+			}
+		});
+	</script>
+</body>
+</html>
